@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Well Care Club - Member Login</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .login-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+  }
+  h1 {
+    color: #007bff;
+    text-align: center;
+  }
+  label {
+    margin-top: 15px;
+    display: block;
+    font-weight: bold;
+  }
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+  }
+  button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  .message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .error {
+    color: #dc3545;
+  }
+  .success {
+    color: #28a745;
+  }
+  .access-link {
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .access-link:hover {
+    background-color: #0056b3;
+  }
+  .contact {
+    margin-top: 25px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+  }
+  .contact a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .contact a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+<div class="login-container">
+  <h1>Well Care Club</h1>
+  <p style="text-align:center; font-weight:600; margin-bottom:20px;">Member Login Portal</p>
+
+  <form id="loginForm">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" autocomplete="username" required />
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" autocomplete="current-password" required />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="message" class="message"></div>
+
+  <div class="contact">
+    <p>Need help? Call us 📞 <a href="tel:7376361961">7376361961</a> or email ✉ <a href="mailto:wellcareclubofficial@gmail.com">wellcareclubofficial@gmail.com</a></p>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const users = {
+      'admin@57859': {
+        password: 'admin@258',
+        url: 'https://drive.google.com/drive/folders/1lwh0SgpSn7T3gJP9wdDSNVLsrJfb3ENB?usp=sharing'
+      },
+      'admin@68920': {
+        password: 'admin@753',
+        url: 'https://sites.google.com/view/wellcareclub-harshraj?usp=sharing'
+      },
+      'admin@84937': {
+        password: 'admin@951',
+        url: 'https://sites.google.com/view/member-access-nagendra?usp=sharing'
+      },
+      'admin@25479': {
+        password: 'admin@237',
+        url: 'https://drive.google.com/drive/folders/1lM4mQeaiFVxxoJxElW294B2R2ROmR3Vc?usp=sharing'
+      }
+    };
+
+    const form = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      messageDiv.textContent = '';
+      messageDiv.className = 'message';
+
+      const username = form.username.value.trim();
+      const password = form.password.value.trim();
+
+      if(users[username] && users[username].password === password) {
+        messageDiv.textContent = 'Click here to access member login';
+        messageDiv.classList.add('success');
+
+        const link = document.createElement('a');
+        link.className = 'access-link';
+        link.href = users[username].url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'Access Your Files';
+
+        messageDiv.innerHTML = '';
+        messageDiv.appendChild(link);
+
+        form.style.display = 'none';
+      } else {
+        messageDiv.textContent = 'Invalid username or password. Please try again.';
+        messageDiv.classList.add('error');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
